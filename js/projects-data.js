@@ -383,7 +383,7 @@
       slug: 'cafeteria-management-system',
       title: 'Cafeteria Management System',
       subtitle: 'Cafeteria Ordering System (Team Project)',
-      cardImage: 'assets/projects/cafeteria-management-system/cover.svg',
+      cardImage: 'assets/projects/cafeteria-management-system/image_0.png',
       technologies: ['PHP', 'MySQL', 'Custom MVC'],
       cardSummary: ['Custom MVC', 'Team Project', 'Ordering System'],
       hero: {
@@ -398,9 +398,39 @@
         'The Cafeteria Management System is a team-built ordering platform implemented in PHP with a custom MVC architecture. It uses manual routing and a MySQL database to manage cafeteria items and orders, demonstrating practical server-side development without a framework.',
       gallery: [
         {
-          src: 'assets/projects/cafeteria-management-system/cover.svg',
-          alt: 'Cafeteria Management System project cover',
-          caption: 'PHP cafeteria ordering system built on a custom MVC architecture.'
+          src: 'assets/projects/cafeteria-management-system/image_1.png',
+          alt: 'Cafeteria Management System screenshot 1',
+          caption: 'Cafeteria Management System — application screenshot.'
+        },
+        {
+          src: 'assets/projects/cafeteria-management-system/image_2.png',
+          alt: 'Cafeteria Management System screenshot 2',
+          caption: 'Cafeteria Management System — application screenshot.'
+        },
+        {
+          src: 'assets/projects/cafeteria-management-system/image_3.png',
+          alt: 'Cafeteria Management System screenshot 3',
+          caption: 'Cafeteria Management System — application screenshot.'
+        },
+        {
+          src: 'assets/projects/cafeteria-management-system/image_4.png',
+          alt: 'Cafeteria Management System screenshot 4',
+          caption: 'Cafeteria Management System — application screenshot.'
+        },
+        {
+          src: 'assets/projects/cafeteria-management-system/image_5.png',
+          alt: 'Cafeteria Management System screenshot 5',
+          caption: 'Cafeteria Management System — application screenshot.'
+        },
+        {
+          src: 'assets/projects/cafeteria-management-system/image_6.png',
+          alt: 'Cafeteria Management System screenshot 6',
+          caption: 'Cafeteria Management System — application screenshot.'
+        },
+        {
+          src: 'assets/projects/cafeteria-management-system/image_7.png',
+          alt: 'Cafeteria Management System screenshot 7',
+          caption: 'Cafeteria Management System — application screenshot.'
         }
       ],
       keyFeatures: [
