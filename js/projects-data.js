@@ -93,7 +93,7 @@
       slug: 'ai-chatbot-cli',
       title: 'AI Chatbot CLI',
       subtitle: 'Conversational AI in the Terminal',
-      cardImage: 'assets/projects/ai-chatbot-cli/cover.svg',
+      cardImage: 'assets/projects/ai-chatbot-cli/image_0.jpeg',
       technologies: ['Node.js', 'Axios', 'OpenRouter API', 'dotenv', 'Readline'],
       cardSummary: ['Generative AI', 'Conversation Memory', 'CLI Tool'],
       hero: {
@@ -108,9 +108,29 @@
         'The AI Chatbot CLI is a lightweight terminal application that integrates the OpenRouter LLM API using raw HTTP requests via Axios. It maintains conversation memory across multiple turns and keeps credentials secure with dotenv, offering a simple and efficient way to chat with a large language model from the command line.',
       gallery: [
         {
-          src: 'assets/projects/ai-chatbot-cli/cover.svg',
-          alt: 'AI Chatbot CLI project cover',
-          caption: 'Terminal-based conversational AI powered by the OpenRouter LLM API.'
+          src: 'assets/projects/ai-chatbot-cli/image_0.jpeg',
+          alt: 'AI Chatbot CLI screenshot 0',
+          caption: 'AI Chatbot CLI — terminal conversational AI.'
+        },
+        {
+          src: 'assets/projects/ai-chatbot-cli/image_1.jpeg',
+          alt: 'AI Chatbot CLI screenshot 1',
+          caption: 'AI Chatbot CLI — application screenshot.'
+        },
+        {
+          src: 'assets/projects/ai-chatbot-cli/image_2.jpeg',
+          alt: 'AI Chatbot CLI screenshot 2',
+          caption: 'AI Chatbot CLI — application screenshot.'
+        },
+        {
+          src: 'assets/projects/ai-chatbot-cli/image_3.jpeg',
+          alt: 'AI Chatbot CLI screenshot 3',
+          caption: 'AI Chatbot CLI — application screenshot.'
+        },
+        {
+          src: 'assets/projects/ai-chatbot-cli/image_4.jpeg',
+          alt: 'AI Chatbot CLI screenshot 4',
+          caption: 'AI Chatbot CLI — application screenshot.'
         }
       ],
       keyFeatures: [
