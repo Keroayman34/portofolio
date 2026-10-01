@@ -1267,6 +1267,11 @@
         display: block;
       }
 
+      .case-hero-image img.case-viewer-trigger,
+      .case-gallery-item img.case-viewer-trigger {
+        cursor: zoom-in;
+      }
+
       .case-section h3 {
         font-family: var(--font-head);
         font-size: 1.2rem;
@@ -1298,6 +1303,11 @@
         aspect-ratio: 16 / 9;
         object-fit: cover;
         display: block;
+        transition: transform 0.25s ease;
+      }
+
+      .case-gallery-item:hover img.case-viewer-trigger {
+        transform: scale(1.02);
       }
 
       .case-gallery-item figcaption {
@@ -1372,6 +1382,170 @@
         margin-bottom: 8px;
         color: var(--text);
         font-family: var(--font-head);
+      }
+
+      /* ===== IMAGE VIEWER ===== */
+      body.image-viewer-open #cursor-dot,
+      body.image-viewer-open #cursor-ring {
+        opacity: 0;
+      }
+
+      .image-viewer {
+        position: fixed;
+        inset: 0;
+        z-index: 120000;
+        background: rgba(2, 6, 23, 0.84);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.24s ease;
+      }
+
+      .image-viewer.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .image-viewer-dialog {
+        width: min(1200px, 100%);
+        height: min(860px, calc(100vh - 48px));
+        background: rgba(15, 23, 42, 0.75);
+        border: 1px solid rgba(148, 163, 184, 0.24);
+        border-radius: 18px;
+        box-shadow: 0 35px 80px rgba(0, 0, 0, 0.5);
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 12px;
+        padding: 14px;
+      }
+
+      .image-viewer-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .image-viewer-meta {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 0.82rem;
+        color: var(--text-muted);
+      }
+
+      .image-viewer-zoom-value {
+        color: var(--cyan);
+        font-weight: 600;
+      }
+
+      .image-viewer-controls {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .image-viewer-btn,
+      .image-viewer-nav {
+        border: 1px solid rgba(148, 163, 184, 0.26);
+        background: rgba(15, 23, 42, 0.8);
+        color: var(--text);
+        border-radius: 10px;
+        min-height: 38px;
+        min-width: 38px;
+        padding: 0 12px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          opacity 0.2s ease;
+      }
+
+      .image-viewer-btn:hover,
+      .image-viewer-nav:hover {
+        transform: translateY(-1px);
+        border-color: rgba(6, 182, 212, 0.5);
+      }
+
+      .image-viewer-btn:focus-visible,
+      .image-viewer-nav:focus-visible {
+        outline: 2px solid rgba(6, 182, 212, 0.75);
+        outline-offset: 2px;
+      }
+
+      .image-viewer-btn:disabled,
+      .image-viewer-nav:disabled {
+        opacity: 0.5;
+      }
+
+      .image-viewer-close {
+        font-size: 1.2rem;
+        line-height: 1;
+      }
+
+      .image-viewer-stage {
+        position: relative;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: rgba(2, 6, 23, 0.85);
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 0;
+        touch-action: none;
+      }
+
+      .image-viewer-stage.is-zoomed {
+        cursor: grab;
+      }
+
+      .image-viewer-stage.is-dragging {
+        cursor: grabbing;
+      }
+
+      .image-viewer-image {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+        user-select: none;
+        -webkit-user-drag: none;
+        transform-origin: center center;
+        transition: transform 0.18s ease;
+      }
+
+      .image-viewer-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 42px;
+        height: 48px;
+        border-radius: 12px;
+        font-size: 1.35rem;
+        z-index: 2;
+        padding: 0;
+      }
+
+      .image-viewer-prev {
+        left: 14px;
+      }
+
+      .image-viewer-next {
+        right: 14px;
+      }
+
+      .image-viewer-caption {
+        font-size: 0.82rem;
+        line-height: 1.6;
+        color: var(--text-muted);
+        padding: 2px 4px 0;
       }
 
       /* ===== CASE STUDY ROUTING MODE ===== */
@@ -1778,6 +1952,46 @@
         .case-feature-grid,
         .case-design-system {
           grid-template-columns: 1fr;
+        }
+
+        .image-viewer {
+          padding: 12px;
+        }
+
+        .image-viewer-dialog {
+          height: min(760px, calc(100vh - 24px));
+          padding: 10px;
+          border-radius: 14px;
+          gap: 10px;
+        }
+
+        .image-viewer-toolbar {
+          align-items: flex-start;
+        }
+
+        .image-viewer-controls {
+          width: 100%;
+          justify-content: flex-end;
+          flex-wrap: wrap;
+        }
+
+        .image-viewer-btn {
+          min-height: 36px;
+          min-width: 36px;
+          padding: 0 10px;
+        }
+
+        .image-viewer-nav {
+          width: 36px;
+          height: 42px;
+        }
+
+        .image-viewer-prev {
+          left: 8px;
+        }
+
+        .image-viewer-next {
+          right: 8px;
         }
       }
     </style>

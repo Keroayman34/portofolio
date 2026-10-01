@@ -490,6 +490,164 @@
         'Custom MVC keeps the codebase organized and extensible.',
         'Team project emphasizing collaboration and version control.'
       ]
+    },
+    {
+      slug: 'testybite',
+      title: 'TestyBite',
+      subtitle: 'Restaurant & Food Ordering Website',
+      cardImage: 'assets/projects/TastyBite_Website/image_1.png',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
+      cardSummary: ['Menu Discovery', 'Product Customization', 'WhatsApp Ordering'],
+      hero: {
+        description:
+          'A modern restaurant ordering experience designed to help customers discover food, explore the menu, customize products, manage their cart, and complete orders through a streamlined digital experience.',
+        role: 'Frontend Development / UI Implementation',
+        links: {}
+      },
+      overview:
+        'TestyBite is a modern restaurant website and digital ordering experience designed around a clear, conversion-focused customer journey. The platform provides a complete flow from homepage and menu discovery through product customization, cart management, checkout, and WhatsApp-based order confirmation. The interface combines food-focused visuals with a clean, responsive UI so customers can explore categories, discover offers, review product details, customize selections, and place orders with minimal friction.',
+      gallery: [
+        {
+          src: 'assets/projects/TastyBite_Website/image_2.png',
+          alt: 'TestyBite restaurant homepage',
+          caption:
+            "TestyBite — Homepage showcasing the restaurant's hero section, categories, and primary ordering actions."
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_3.png',
+          alt: 'TestyBite menu page',
+          caption:
+            'TestyBite — Menu interface with food categories, filters, product cards, pricing, and add-to-cart actions.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_4.png',
+          alt: 'TestyBite product details page',
+          caption:
+            'TestyBite — Product details interface with customization options, pricing, extras, and quantity controls.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_5.png',
+          alt: 'TestyBite shopping cart',
+          caption:
+            'TestyBite — Shopping cart with selected items, quantities, pricing, delivery fee, and order summary.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_6.png',
+          alt: 'TestyBite checkout and WhatsApp order confirmation flow',
+          caption:
+            'TestyBite — Checkout interface for customer information and WhatsApp-based order confirmation.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_7.png',
+          alt: 'TestyBite about us page',
+          caption: 'TestyBite — About Us page presenting the restaurant story and core value propositions.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_8.png',
+          alt: 'TestyBite special offers page',
+          caption: 'TestyBite — Special Offers page featuring promotional combos and limited-time deals.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_9.png',
+          alt: 'TestyBite contact us page',
+          caption:
+            'TestyBite — Contact page with communication channels, location information, map, and working hours.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_10.png',
+          alt: 'TestyBite locations page',
+          caption: 'TestyBite — Locations page showcasing restaurant branches, branch details, and directions.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_11.png',
+          alt: 'TestyBite customer reviews page',
+          caption: 'TestyBite — Customer Reviews page presenting ratings, testimonials, and social proof.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_12.png',
+          alt: 'TestyBite gallery and Instagram section',
+          caption: 'TestyBite — Gallery / Instagram section showcasing food and restaurant content.'
+        },
+        {
+          src: 'assets/projects/TastyBite_Website/image_13.png',
+          alt: 'TestyBite global footer preview',
+          caption:
+            'TestyBite — Global footer preview with navigation, menu categories, contact information, and social links.'
+        }
+      ],
+      keyFeatures: [
+        {
+          title: 'Menu & Product Discovery',
+          items: [
+            'Organized food categories',
+            'Menu browsing experience',
+            'Product cards with pricing',
+            'Category filtering',
+            'Search-oriented menu interface',
+            'Clear product information'
+          ]
+        },
+        {
+          title: 'Product Customization',
+          items: [
+            'Dedicated product details page',
+            'Product images and descriptions',
+            'Size selection',
+            'Crust selection',
+            'Extra/add-on options',
+            'Quantity controls',
+            'Dynamic add-to-cart interaction'
+          ]
+        },
+        {
+          title: 'Shopping & Ordering',
+          items: [
+            'Shopping cart',
+            'Quantity adjustment',
+            'Item removal',
+            'Order subtotal and delivery fee',
+            'Order total calculation',
+            'Checkout interface',
+            'WhatsApp-based order confirmation flow'
+          ]
+        },
+        {
+          title: 'Restaurant Discovery',
+          items: [
+            'About Us section',
+            'Restaurant story',
+            'Why Choose Us section',
+            'Special offers',
+            'Promotional food combos',
+            'Branch/location information',
+            'Working hours',
+            'Contact information'
+          ]
+        },
+        {
+          title: 'Customer Experience',
+          items: [
+            'Customer reviews',
+            'Ratings presentation',
+            'Instagram/social media gallery',
+            'Responsive navigation',
+            'Clear calls to action',
+            'Mobile-friendly interface'
+          ]
+        }
+      ],
+      technicalImplementation: [
+        'Frontend website structure covering menu browsing, product details, cart, checkout, and restaurant information pages.',
+        'Responsive page layouts and content organization tailored for mobile, tablet, and desktop presentation.',
+        'UI patterns for product cards, category navigation, call-to-action blocks, and sectioned information architecture.',
+        'Ordering flow structured around cart review and WhatsApp-oriented order confirmation.'
+      ],
+      engineeringHighlights: [
+        'Responsive restaurant-focused interface with consistent visual hierarchy across key pages.',
+        'Structured browsing flow from menu discovery to product customization and order completion.',
+        'Clear customer journey supported by dedicated pages for offers, locations, reviews, and contact.',
+        'Cohesive multi-page frontend experience aligned with food-ordering conversion goals.'
+      ]
     }
   ];
 })();
