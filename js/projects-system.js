@@ -12,6 +12,24 @@
     return (hash || '').trim().toLowerCase();
   }
 
+  function getLocalizedValue(value, language) {
+    if (value && typeof value === 'object' && !Array.isArray(value)) {
+      if (language && value[language] !== undefined) return value[language];
+      if (value.en !== undefined) return value.en;
+    }
+    return value ?? '';
+  }
+
+  function getLocalizedString(value, language) {
+    return String(getLocalizedValue(value, language));
+  }
+
+  function getLocalizedList(items, language) {
+    return Array.isArray(items)
+      ? items.map((item) => (typeof item === 'string' ? item : getLocalizedString(item, language)))
+      : [];
+  }
+
   function getProjectFromHash(projects, hash) {
     const normalizedHash = normalizeHash(hash);
     if (!normalizedHash.startsWith('#project/')) {
@@ -26,33 +44,38 @@
     return projects.find((project) => project.slug.toLowerCase() === slug) || null;
   }
 
-  function renderCard(project, index) {
+  function renderCard(project, index, language) {
     const delay = Math.min(index * 0.08, 0.32);
+    const title = getLocalizedString(project.title, language);
+    const subtitle = getLocalizedString(project.subtitle, language);
+    const cardSummary = getLocalizedList(project.cardSummary || [], language).join(' · ');
+    const technologies = getLocalizedList(project.technologies || [], language).join(' · ');
+
     return `
       <article class="project-card reveal" style="transition-delay:${delay.toFixed(2)}s">
-        <a class="project-card-link" href="#project/${escapeHtml(project.slug)}" aria-label="Open ${escapeHtml(project.title)} case study">
+        <a class="project-card-link" href="#project/${escapeHtml(project.slug)}" aria-label="Open ${escapeHtml(title)} case study">
           <div class="project-card-media">
-            <img src="${escapeHtml(project.cardImage)}" alt="${escapeHtml(project.title)} project cover image" loading="lazy" />
+            <img src="${escapeHtml(project.cardImage)}" alt="${escapeHtml(title)} project cover image" loading="lazy" />
           </div>
           <div class="project-card-body">
-            <h3 class="project-name">${escapeHtml(project.title)}</h3>
-            <p class="project-subtitle">${escapeHtml(project.subtitle)}</p>
-            <p class="project-stack">${escapeHtml(project.technologies.join(' · '))}</p>
-            <p class="project-summary">${escapeHtml(project.cardSummary.join(' · '))}</p>
+            <h3 class="project-name">${escapeHtml(title)}</h3>
+            <p class="project-subtitle">${escapeHtml(subtitle)}</p>
+            <p class="project-stack">${escapeHtml(technologies)}</p>
+            <p class="project-summary">${escapeHtml(cardSummary)}</p>
           </div>
         </a>
       </article>
     `;
   }
 
-  function renderFeatureGroups(featureGroups) {
-    return featureGroups
+  function renderFeatureGroups(featureGroups, language) {
+    return (featureGroups || [])
       .map(
         (group) => `
           <article class="case-feature-group">
-            <h4>${escapeHtml(group.title)}</h4>
+            <h4>${escapeHtml(getLocalizedString(group.title, language))}</h4>
             <ul>
-              ${group.items.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+              ${(group.items || []).map((item) => `<li>${escapeHtml(getLocalizedString(item, language))}</li>`).join('')}
             </ul>
           </article>
         `
@@ -504,26 +527,32 @@
     };
   }
 
-  function renderCaseStudy(project) {
+  function renderCaseStudy(project, language) {
     const hero = project.hero || {};
     const heroLinks = hero.links || {};
     const hasLinks = Boolean(heroLinks.github || heroLinks.liveDemo);
     const hasDesignSystem = Boolean(project.designSystem);
+    const title = getLocalizedString(project.title, language);
+    const subtitle = getLocalizedString(project.subtitle, language);
+    const overview = getLocalizedString(project.overview, language);
+    const role = getLocalizedString(hero.role, language);
+    const description = getLocalizedString(hero.description, language);
+    const techText = getLocalizedList(project.technologies || [], language).join(' · ');
 
     return `
       <div class="project-case-study-layout">
-        <a class="case-back-link" href="#projects">← Back to Projects</a>
+        <a class="case-back-link" href="#projects">${language === 'ar' ? '← العودة إلى المشاريع' : '← Back to Projects'}</a>
 
         <section class="case-hero">
           <div class="case-hero-content">
-            <p class="case-kicker">Project Case Study</p>
-            <h2>${escapeHtml(project.title)}</h2>
-            <p class="case-subtitle">${escapeHtml(project.subtitle)}</p>
-            <p class="case-description">${escapeHtml(hero.description || '')}</p>
-            <p class="case-stack">${escapeHtml(project.technologies.join(' · '))}</p>
+            <p class="case-kicker">${language === 'ar' ? 'دراسة حالة المشروع' : 'Project Case Study'}</p>
+            <h2>${escapeHtml(title)}</h2>
+            <p class="case-subtitle">${escapeHtml(subtitle)}</p>
+            <p class="case-description">${escapeHtml(description)}</p>
+            <p class="case-stack">${escapeHtml(techText)}</p>
             ${
-              hero.role
-                ? `<p class="case-role"><span>Role:</span> ${escapeHtml(hero.role)}</p>`
+              role
+                ? `<p class="case-role"><span>${language === 'ar' ? 'الدور:' : 'Role:'}</span> ${escapeHtml(role)}</p>`
                 : ''
             }
             ${
@@ -536,7 +565,7 @@
                     }
                     ${
                       heroLinks.liveDemo
-                        ? `<a href="${escapeHtml(heroLinks.liveDemo)}" target="_blank" rel="noopener noreferrer">Live Demo</a>`
+                        ? `<a href="${escapeHtml(heroLinks.liveDemo)}" target="_blank" rel="noopener noreferrer">${language === 'ar' ? 'عرض مباشر' : 'Live Demo'}</a>`
                         : ''
                     }
                   </div>`
@@ -544,24 +573,24 @@
             }
           </div>
           <div class="case-hero-image">
-            <img class="case-viewer-trigger" data-lightbox-index="0" src="${escapeHtml(project.cardImage)}" alt="${escapeHtml(project.title)} primary preview" />
+            <img class="case-viewer-trigger" data-lightbox-index="0" src="${escapeHtml(project.cardImage)}" alt="${escapeHtml(title)} primary preview" />
           </div>
         </section>
 
         <section class="case-section">
-          <h3>Project Overview</h3>
-          <p>${escapeHtml(project.overview)}</p>
+          <h3>${language === 'ar' ? 'نظرة عامة على المشروع' : 'Project Overview'}</h3>
+          <p>${escapeHtml(overview)}</p>
         </section>
 
         <section class="case-section">
-          <h3>Project Gallery</h3>
+          <h3>${language === 'ar' ? 'معرض المشروع' : 'Project Gallery'}</h3>
           <div class="case-gallery">
-            ${project.gallery
+            ${(project.gallery || [])
               .map(
                 (shot, index) => `
                   <figure class="case-gallery-item">
-                    <img class="case-viewer-trigger" data-lightbox-index="${index + 1}" src="${escapeHtml(shot.src)}" alt="${escapeHtml(shot.alt)}" loading="lazy" />
-                    <figcaption>${escapeHtml(shot.caption)}</figcaption>
+                    <img class="case-viewer-trigger" data-lightbox-index="${index + 1}" src="${escapeHtml(shot.src)}" alt="${escapeHtml(shot.alt || title)}" loading="lazy" />
+                    <figcaption>${escapeHtml(getLocalizedString(shot.caption, language))}</figcaption>
                   </figure>
                 `
               )
@@ -570,42 +599,46 @@
         </section>
 
         <section class="case-section">
-          <h3>Key Features</h3>
+          <h3>${language === 'ar' ? 'المميزات الأساسية' : 'Key Features'}</h3>
           <div class="case-feature-grid">
-            ${renderFeatureGroups(project.keyFeatures)}
+            ${renderFeatureGroups(project.keyFeatures, language)}
           </div>
         </section>
 
         <section class="case-section">
-          <h3>Technical Implementation</h3>
+          <h3>${language === 'ar' ? 'التنفيذ التقني' : 'Technical Implementation'}</h3>
           <ul class="case-list">
-            ${project.technicalImplementation.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+            ${(project.technicalImplementation || [])
+              .map((item) => `<li>${escapeHtml(getLocalizedString(item, language))}</li>`)
+              .join('')}
           </ul>
         </section>
 
         <section class="case-section">
-          <h3>Engineering Highlights</h3>
+          <h3>${language === 'ar' ? 'أبرز الجوانب الهندسية' : 'Engineering Highlights'}</h3>
           <ul class="case-list">
-            ${project.engineeringHighlights.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}
+            ${(project.engineeringHighlights || [])
+              .map((item) => `<li>${escapeHtml(getLocalizedString(item, language))}</li>`)
+              .join('')}
           </ul>
         </section>
 
         ${
           hasDesignSystem
             ? `<section class="case-section">
-                <h3>Design System / UI Details</h3>
+                <h3>${language === 'ar' ? 'نظام التصميم / تفاصيل واجهة المستخدم' : 'Design System / UI Details'}</h3>
                 <div class="case-design-system">
                   <div>
-                    <h4>Color Direction</h4>
-                    <p>${escapeHtml(project.designSystem.palette.join(' · '))}</p>
+                    <h4>${language === 'ar' ? 'اتجاه الألوان' : 'Color Direction'}</h4>
+                    <p>${escapeHtml((project.designSystem.palette || []).join(' · '))}</p>
                   </div>
                   <div>
-                    <h4>Typography</h4>
-                    <p>${escapeHtml(project.designSystem.typography.join(' · '))}</p>
+                    <h4>${language === 'ar' ? 'الخطوط' : 'Typography'}</h4>
+                    <p>${escapeHtml((project.designSystem.typography || []).join(' · '))}</p>
                   </div>
                   <div>
-                    <h4>UI Notes</h4>
-                    <p>${escapeHtml(project.designSystem.notes)}</p>
+                    <h4>${language === 'ar' ? 'ملاحظات الواجهة' : 'UI Notes'}</h4>
+                    <p>${escapeHtml(getLocalizedString(project.designSystem.notes, language))}</p>
                   </div>
                 </div>
               </section>`
@@ -615,16 +648,16 @@
         ${
           hasLinks
             ? `<section class="case-section">
-                <h3>Links</h3>
+                <h3>${language === 'ar' ? 'الروابط' : 'Links'}</h3>
                 <div class="case-links">
                   ${
                     heroLinks.github
-                      ? `<a href="${escapeHtml(heroLinks.github)}" target="_blank" rel="noopener noreferrer">GitHub Repository</a>`
+                      ? `<a href="${escapeHtml(heroLinks.github)}" target="_blank" rel="noopener noreferrer">GitHub</a>`
                       : ''
                   }
                   ${
                     heroLinks.liveDemo
-                      ? `<a href="${escapeHtml(heroLinks.liveDemo)}" target="_blank" rel="noopener noreferrer">Live Demo</a>`
+                      ? `<a href="${escapeHtml(heroLinks.liveDemo)}" target="_blank" rel="noopener noreferrer">${language === 'ar' ? 'عرض مباشر' : 'Live Demo'}</a>`
                       : ''
                   }
                 </div>
@@ -648,8 +681,20 @@
     const imageViewer = createImageViewer();
     let currentProject = null;
 
-    projectsGrid.innerHTML = projects.map((project, index) => renderCard(project, index)).join('');
-    window.dispatchEvent(new CustomEvent('portfolio:interactive-updated'));
+    const renderPortfolio = (language = 'en') => {
+      projectsGrid.innerHTML = projects.map((project, index) => renderCard(project, index, language)).join('');
+      window.dispatchEvent(new CustomEvent('portfolio:interactive-updated'));
+
+      const selectedProject = getProjectFromHash(projects, window.location.hash);
+      if (selectedProject) {
+        currentProject = selectedProject;
+        caseStudyContainer.innerHTML = renderCaseStudy(selectedProject, language);
+        window.dispatchEvent(new CustomEvent('portfolio:interactive-updated'));
+      } else {
+        currentProject = null;
+        caseStudyContainer.innerHTML = '';
+      }
+    };
 
     caseStudyContainer.addEventListener('click', (event) => {
       const triggerImage = event.target.closest('.case-viewer-trigger');
@@ -668,13 +713,14 @@
     const handleRoute = () => {
       const selectedProject = getProjectFromHash(projects, window.location.hash);
       const isCaseStudyRoute = Boolean(selectedProject);
+      const language = document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en';
 
       document.body.classList.toggle('project-details-mode', isCaseStudyRoute);
       caseStudySection.hidden = !isCaseStudyRoute;
 
       if (selectedProject) {
         currentProject = selectedProject;
-        caseStudyContainer.innerHTML = renderCaseStudy(selectedProject);
+        caseStudyContainer.innerHTML = renderCaseStudy(selectedProject, language);
         window.dispatchEvent(new CustomEvent('portfolio:interactive-updated'));
         window.scrollTo({ top: 0, behavior: 'smooth' });
       } else {
@@ -685,6 +731,12 @@
     };
 
     window.addEventListener('hashchange', handleRoute);
+    window.addEventListener('portfolio:language-change', () => {
+      const language = document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en';
+      renderPortfolio(language);
+      handleRoute();
+    });
+    renderPortfolio(document.documentElement.getAttribute('lang') === 'ar' ? 'ar' : 'en');
     handleRoute();
   }
 

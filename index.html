@@ -35,6 +35,26 @@
         --glow-cyan: 0 0 40px rgba(6, 182, 212, 0.4);
       }
 
+      :root[data-theme="light"] {
+        --indigo: #2563eb;
+        --indigo-light: #4f8df7;
+        --pink: #ec4899;
+        --cyan: #06b6d4;
+        --amber: #f59e0b;
+        --bg: #ffffff;
+        --bg2: #f8fafc;
+        --bg3: #eef6ff;
+        --surface: rgba(37, 99, 235, 0.03);
+        --surface2: rgba(124, 58, 237, 0.06);
+        --border: rgba(15, 23, 42, 0.08);
+        --text: #1f2937;
+        --text-muted: #475569;
+        --text-dim: #64748b;
+        --glow-indigo: 0 0 0 1px rgba(37, 99, 235, 0.08), 0 22px 48px rgba(37, 99, 235, 0.12);
+        --glow-pink: 0 0 0 1px rgba(236, 72, 153, 0.08), 0 22px 48px rgba(236, 72, 153, 0.12);
+        --glow-cyan: 0 0 0 1px rgba(6, 182, 212, 0.08), 0 22px 48px rgba(6, 182, 212, 0.12);
+      }
+
       /* ===== RESET ===== */
       *,
       *::before,
@@ -54,6 +74,17 @@
         color: var(--text);
         overflow-x: hidden;
         cursor: none;
+        transition: background 0.3s ease, color 0.3s ease;
+      }
+
+      html[dir="rtl"] body,
+      html[dir="rtl"] .nav-links,
+      html[dir="rtl"] .hero-cta,
+      html[dir="rtl"] .exp-meta,
+      html[dir="rtl"] .contact-card,
+      html[dir="rtl"] .case-links,
+      html[dir="rtl"] .footer-links {
+        direction: rtl;
       }
 
       /* ===== SCROLLBAR ===== */
@@ -217,6 +248,10 @@
         animation: slideNavDown 0.7s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
 
+      html[data-theme="light"] nav {
+        background: rgba(255, 255, 255, 0.78);
+      }
+
       @keyframes slideNavDown {
         to {
           transform: translateY(0);
@@ -238,6 +273,104 @@
         display: flex;
         gap: 4px;
         list-style: none;
+        align-items: center;
+      }
+
+      .nav-controls {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .lang-switcher,
+      .theme-toggle {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: rgba(255, 255, 255, 0.02);
+        color: var(--text);
+        min-height: 36px;
+        cursor: pointer;
+        transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+      }
+
+      .lang-switcher {
+        padding: 0 12px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        gap: 6px;
+        min-width: 112px;
+      }
+
+      .lang-switcher:focus-visible,
+      .theme-toggle:focus-visible,
+      .nav-hamburger:focus-visible,
+      .nav-links a:focus-visible {
+        outline: 2px solid rgba(6, 182, 212, 0.85);
+        outline-offset: 2px;
+      }
+
+      .theme-toggle {
+        width: 42px;
+        height: 36px;
+        padding: 0;
+        font-size: 1rem;
+      }
+
+      .lang-switcher:hover,
+      .theme-toggle:hover {
+        transform: translateY(-1px);
+        border-color: rgba(99, 102, 241, 0.4);
+      }
+
+      .lang-menu {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        background: rgba(15, 23, 42, 0.96);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        min-width: 160px;
+        padding: 8px;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(-6px);
+        transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+        box-shadow: 0 20px 40px rgba(2, 6, 23, 0.3);
+        z-index: 20;
+      }
+
+      .lang-switcher[aria-expanded="true"] + .lang-menu,
+      .lang-menu:hover,
+      .lang-menu:focus-within {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+      }
+
+      .lang-option {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        width: 100%;
+        border: none;
+        background: transparent;
+        color: var(--text);
+        text-align: left;
+        padding: 10px 12px;
+        border-radius: 8px;
+        font: inherit;
+        cursor: pointer;
+      }
+
+      .lang-option:hover,
+      .lang-option.active {
+        background: rgba(79, 70, 229, 0.12);
       }
 
       .nav-links a {
@@ -281,6 +414,14 @@
         background: none;
         border: none;
         padding: 4px;
+      }
+
+      html[dir="rtl"] .nav-controls {
+        flex-direction: row-reverse;
+      }
+
+      html[dir="rtl"] .nav-links {
+        flex-direction: row-reverse;
       }
 
       .nav-hamburger span {
@@ -2017,13 +2158,32 @@
     <!-- NAVBAR -->
     <nav id="navbar">
       <a href="#hero" class="nav-logo">Kerollos Ayman </a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#education">Education</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+      <div class="nav-controls">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
+          <li><a href="#experience" data-i18n="nav.experience">Experience</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#education" data-i18n="nav.education">Education</a></li>
+          <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+        </ul>
+        <div style="position: relative; display: flex; align-items: center; gap: 8px;">
+          <button class="lang-switcher" id="langSwitcher" type="button" aria-label="Select language" aria-expanded="false">
+            <span id="currentLangLabel">EN</span>
+            <span aria-hidden="true">▼</span>
+          </button>
+          <div class="lang-menu" id="langMenu" role="menu" aria-label="Language menu">
+            <button class="lang-option active" type="button" data-lang="en" role="menuitemradio" aria-checked="true">
+              🇬🇧 English
+            </button>
+            <button class="lang-option" type="button" data-lang="ar" role="menuitemradio" aria-checked="false">
+              🇪🇬 العربية
+            </button>
+          </div>
+          <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle light or dark theme" title="Toggle theme">
+            <span aria-hidden="true">☀</span>
+          </button>
+        </div>
+      </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -2046,7 +2206,7 @@
               Scholarship
             </p>
             <div class="hero-cta reveal">
-              <a href="#projects" class="btn-primary">
+              <a href="#projects" class="btn-primary" data-i18n="cta.viewProjects">
                 <svg
                   width="16"
                   height="16"
@@ -2061,7 +2221,7 @@
                 </svg>
                 View Projects
               </a>
-              <a href="mailto:keroayman34@gmail.com" class="btn-secondary">
+              <a href="mailto:keroayman34@gmail.com" class="btn-secondary" data-i18n="cta.contactMe">
                 <svg
                   width="16"
                   height="16"
@@ -2632,12 +2792,174 @@
     <script src="js/projects-data.js"></script>
     <script src="js/projects-system.js"></script>
     <script>
+      const STORAGE_KEYS = { theme: 'portfolio-theme', language: 'portfolio-language' };
+
+      function getStoredTheme() {
+        return localStorage.getItem(STORAGE_KEYS.theme) || 'dark';
+      }
+
+      function getStoredLanguage() {
+        return localStorage.getItem(STORAGE_KEYS.language) || 'en';
+      }
+
+      function applyTheme(theme) {
+        const root = document.documentElement;
+        root.setAttribute('data-theme', theme);
+        const themeToggle = document.getElementById('themeToggle');
+        if (themeToggle) {
+          themeToggle.innerHTML = theme === 'light' ? '<span aria-hidden="true">🌙</span>' : '<span aria-hidden="true">☀</span>';
+          themeToggle.setAttribute('aria-label', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+          themeToggle.setAttribute('title', theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme');
+        }
+      }
+
+      const I18N = {
+        en: {
+          'nav.skills': 'Skills',
+          'nav.experience': 'Experience',
+          'nav.projects': 'Projects',
+          'nav.education': 'Education',
+          'nav.contact': 'Contact',
+          'hero.status': 'Available for Opportunities',
+          'cta.viewProjects': 'View Projects',
+          'cta.contactMe': 'Get in Touch',
+          'section.skills.label': 'Expertise',
+          'section.skills.title': 'Skills & Technologies',
+          'section.skills.subtitle': 'A full-stack arsenal spanning backend, frontend, databases, and DevOps tooling.',
+          'section.experience.label': 'Journey',
+          'section.experience.title': 'Experience & Development',
+          'section.experience.subtitle': 'Hands-on, verified project work across the MERN stack, generative AI integration, and full-stack web development.',
+          'section.projects.label': 'Work',
+          'section.projects.title': 'Projects',
+          'section.projects.subtitle': 'Real-world platforms built with performance and scalability in mind.',
+          'section.education.label': 'Academic',
+          'section.education.title': 'Education',
+          'section.education.subtitle': 'A strong technical foundation across computer science and web development.',
+          'section.contact.label': "Let's Talk",
+          'section.contact.title': 'Get In Touch',
+          'section.contact.subtitle': "I'm open to new opportunities, collaborations, and freelance projects. Let's build something great.",
+          'footer.github': 'GitHub',
+          'footer.linkedin': 'LinkedIn',
+          'footer.email': 'Email'
+        },
+        ar: {
+          'nav.skills': 'المهارات',
+          'nav.experience': 'الخبرات',
+          'nav.projects': 'المشاريع',
+          'nav.education': 'التعليم',
+          'nav.contact': 'تواصل معي',
+          'hero.status': 'متاح للفرص',
+          'cta.viewProjects': 'استعرض المشاريع',
+          'cta.contactMe': 'تواصل معي',
+          'section.skills.label': 'الخبرة',
+          'section.skills.title': 'المهارات والتقنيات',
+          'section.skills.subtitle': 'مجموعة متكاملة من المهارات في الواجهة، الخادم، قواعد البيانات، وأدوات التطوير.',
+          'section.experience.label': 'المسار',
+          'section.experience.title': 'الخبرة والتطوير',
+          'section.experience.subtitle': 'خبرة عملية ومشاريع مصدقة عبر MERN stack، تكامل الذكاء الاصطناعي، وتطوير الويب.',
+          'section.projects.label': 'الأعمال',
+          'section.projects.title': 'المشاريع',
+          'section.projects.subtitle': 'منصات عملية تم إنشاؤها مع مراعاة الأداء وقابلية التوسع.',
+          'section.education.label': 'الأكاديمي',
+          'section.education.title': 'التعليم',
+          'section.education.subtitle': 'أساس تقني قوي في علوم الحاسب وتطوير الويب.',
+          'section.contact.label': 'لنبدأ الحديث',
+          'section.contact.title': 'تواصل معي',
+          'section.contact.subtitle': 'أنا متاح لفرص جديدة، والتعاون، ومشاريع العمل الحر. دعنا نبني شيئًا رائعًا.',
+          'footer.github': 'غيت هاب',
+          'footer.linkedin': 'لينكدإن',
+          'footer.email': 'البريد الإلكتروني'
+        }
+      };
+
+      function applyLanguage(language) {
+        const html = document.documentElement;
+        const isArabic = language === 'ar';
+        const dictionary = I18N[language] || I18N.en;
+        html.setAttribute('lang', language);
+        html.setAttribute('dir', isArabic ? 'rtl' : 'ltr');
+
+        const label = document.getElementById('currentLangLabel');
+        if (label) label.textContent = isArabic ? 'AR' : 'EN';
+
+        const langOptions = document.querySelectorAll('.lang-option');
+        langOptions.forEach((option) => {
+          const active = option.dataset.lang === language;
+          option.classList.toggle('active', active);
+          option.setAttribute('aria-checked', String(active));
+        });
+
+        const switcher = document.getElementById('langSwitcher');
+        if (switcher) switcher.setAttribute('aria-expanded', 'false');
+
+        document.querySelectorAll('[data-i18n]').forEach((element) => {
+          const key = element.dataset.i18n;
+          const nextValue = dictionary[key] || element.textContent;
+          if (nextValue) element.textContent = nextValue;
+        });
+
+        document.body.dir = isArabic ? 'rtl' : 'ltr';
+        window.dispatchEvent(new CustomEvent('portfolio:language-change', { detail: { language } }));
+      }
+
+      function setTheme(theme) {
+        localStorage.setItem(STORAGE_KEYS.theme, theme);
+        applyTheme(theme);
+      }
+
+      function setLanguage(language) {
+        localStorage.setItem(STORAGE_KEYS.language, language);
+        applyLanguage(language);
+      }
+
+      function initThemeControls() {
+        const themeToggle = document.getElementById('themeToggle');
+        const langSwitcher = document.getElementById('langSwitcher');
+        const langOptions = document.querySelectorAll('.lang-option');
+
+        const initialTheme = getStoredTheme();
+        const initialLanguage = getStoredLanguage();
+        applyTheme(initialTheme);
+        applyLanguage(initialLanguage);
+
+        if (themeToggle) {
+          themeToggle.addEventListener('click', () => {
+            const nextTheme = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+            setTheme(nextTheme);
+          });
+        }
+
+        if (langSwitcher) {
+          langSwitcher.addEventListener('click', () => {
+            const expanded = langSwitcher.getAttribute('aria-expanded') === 'true';
+            langSwitcher.setAttribute('aria-expanded', String(!expanded));
+          });
+        }
+
+        langOptions.forEach((option) => {
+          option.addEventListener('click', () => {
+            const nextLanguage = option.dataset.lang;
+            setLanguage(nextLanguage);
+          });
+        });
+
+        document.addEventListener('click', (event) => {
+          const switcher = document.getElementById('langSwitcher');
+          const menu = document.getElementById('langMenu');
+          if (switcher && menu && !switcher.contains(event.target) && !menu.contains(event.target)) {
+            switcher.setAttribute('aria-expanded', 'false');
+          }
+        });
+      }
+
       /* ===== LOADER ===== */
       window.addEventListener("load", () => {
         setTimeout(() => {
           document.getElementById("loader").classList.add("hidden");
         }, 2200);
       });
+
+      initThemeControls();
 
       if (
         window.PortfolioProjects &&

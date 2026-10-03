@@ -15,8 +15,10 @@
           github: 'https://github.com/Keroayman34/medical-appointment-system'
         }
       },
-      overview:
-        'The Medical Appointment System is a team-built platform that lets patients book appointments, doctors manage their schedules, and admins oversee the whole clinic. Access is role-based (Admin / Doctor / Patient) and secured with JWT authentication. Booking conflicts are prevented at the database level using compound indexes, and email notifications keep users informed of appointment changes.',
+      overview: {
+        en: 'The Medical Appointment System is a team-built platform that lets patients book appointments, doctors manage their schedules, and admins oversee the whole clinic. Access is role-based (Admin / Doctor / Patient) and secured with JWT authentication. Booking conflicts are prevented at the database level using compound indexes, and email notifications keep users informed of appointment changes.',
+        ar: 'نظام Medical Appointment System هو منصة طبية متكاملة تم تطويرها ضمن عمل جماعي، وتساعد المرضى على حجز المواعيد بسهولة، وتمكّن الأطباء من إدارة جداولهم، وتمنح الإدارة رؤية شاملة لإدارة العيادة. يعتمد النظام على صلاحيات مختلفة حسب الدور (Admin / Doctor / Patient) مع حماية تسجيل الدخول باستخدام JWT Authentication. كما يمنع تعارض المواعيد على مستوى قاعدة البيانات عبر compound indexes، مع إرسال إشعارات بريد إلكتروني لإبقاء المستخدمين على اطلاع بأي تحديثات في المواعيد.'
+      },
       gallery: [
         {
           src: 'assets/projects/medical-appointment-system/image_1.jpeg',
@@ -104,8 +106,10 @@
           github: 'https://github.com/Keroayman34/AI-Chatbot-CLI-Node.js-OpenRouterAPI'
         }
       },
-      overview:
-        'The AI Chatbot CLI is a lightweight terminal application that integrates the OpenRouter LLM API using raw HTTP requests via Axios. It maintains conversation memory across multiple turns and keeps credentials secure with dotenv, offering a simple and efficient way to chat with a large language model from the command line.',
+      overview: {
+        en: 'The AI Chatbot CLI is a lightweight terminal application that integrates the OpenRouter LLM API using raw HTTP requests via Axios. It maintains conversation memory across multiple turns and keeps credentials secure with dotenv, offering a simple and efficient way to chat with a large language model from the command line.',
+        ar: 'مشروع AI Chatbot CLI هو تطبيق خفيف يعمل من خلال الطرفية (Terminal)، ويتيح للمستخدم إجراء محادثة مباشرة مع نموذج لغوي كبير عبر OpenRouter LLM API باستخدام Axios وطلبات HTTP مباشرة. يحافظ التطبيق على سياق المحادثة عبر عدة رسائل متتالية، ويؤمّن بيانات الوصول عبر dotenv، ليقدم تجربة سريعة وعملية للتفاعل مع الذكاء الاصطناعي من سطر الأوامر.'
+      },
       gallery: [
         {
           src: 'assets/projects/ai-chatbot-cli/image_0.jpeg',
@@ -173,130 +177,6 @@
       ]
     },
     {
-      slug: 'smartcart-pro',
-      title: 'SmartCart Pro',
-      subtitle: 'E-Commerce Frontend',
-      cardImage: 'assets/projects/smartcart-pro/cover.svg',
-      technologies: ['Vanilla JavaScript ES6+', 'HTML5', 'CSS3', 'LocalStorage'],
-      cardSummary: ['Responsive Storefront', 'Cart Persistence', 'Dark Mode'],
-      hero: {
-        description:
-          'A responsive e-commerce frontend with persistent cart and wishlist, real-time search, and dark mode — built with vanilla JavaScript and local storage.',
-        role: 'Frontend Development',
-        links: {
-          github: 'https://github.com/Keroayman34/SmartCart-Pro-AI-Powered-Ecommerce-Frontend'
-        }
-      },
-      overview:
-        'SmartCart Pro is a frontend e-commerce experience focused on usability and polish. It provides a responsive storefront, persistent cart and wishlist through LocalStorage, real-time product search, and a built-in dark mode. The project demonstrates strong vanilla JavaScript fundamentals without framework dependencies.',
-      gallery: [
-        {
-          src: 'assets/projects/smartcart-pro/cover.svg',
-          alt: 'SmartCart Pro project cover',
-          caption: 'Vanilla JavaScript e-commerce frontend with cart persistence and dark mode.'
-        }
-      ],
-      keyFeatures: [
-        {
-          title: 'Shopping',
-          items: [
-            'Responsive storefront layout',
-            'Cart persistence with LocalStorage',
-            'Wishlist support'
-          ]
-        },
-        {
-          title: 'Interaction',
-          items: [
-            'Real-time product search',
-            'Dark mode toggle',
-            'Smooth client-side updates'
-          ]
-        },
-        {
-          title: 'Frontend Quality',
-          items: [
-            'Vanilla JavaScript ES6+',
-            'Semantic HTML5 markup',
-            'Custom CSS3 styling'
-          ]
-        }
-      ],
-      technicalImplementation: [
-        'Built with vanilla JavaScript ES6+ for all interactivity.',
-        'LocalStorage used for cart and wishlist persistence across sessions.',
-        'Real-time search filters products on user input.',
-        'Dark mode implemented with CSS variables and a state toggle.'
-      ],
-      engineeringHighlights: [
-        'Framework-free architecture keeps the bundle lightweight.',
-        'Persistence layer gives a native app-like shopping experience.',
-        'Clean separation of state, rendering, and styling concerns.'
-      ]
-    },
-    {
-      slug: 'graphql-users-todos-api',
-      title: 'GraphQL Users & Todos API',
-      subtitle: 'GraphQL API with Auth',
-      cardImage: 'assets/projects/graphql-users-todos-api/cover.svg',
-      technologies: ['Node.js', 'GraphQL', 'Apollo Server', 'MongoDB', 'JWT'],
-      cardSummary: ['GraphQL CRUD', 'JWT Auth', 'Protected Resolvers'],
-      hero: {
-        description:
-          'A GraphQL API offering full CRUD for users and todos, with JWT authentication and protected resolvers powered by Apollo Server.',
-        role: 'Backend / API Development',
-        links: {
-          github: 'https://github.com/Keroayman34/graphql-users-todos-api'
-        }
-      },
-      overview:
-        'The GraphQL Users & Todos API is a backend service built with Apollo Server. It exposes a typed GraphQL schema with full CRUD operations for users and todos, and secures access using JWT authentication with protected resolvers that require a valid token.',
-      gallery: [
-        {
-          src: 'assets/projects/graphql-users-todos-api/cover.svg',
-          alt: 'GraphQL Users & Todos API project cover',
-          caption: 'Apollo Server GraphQL API with JWT-protected resolvers.'
-        }
-      ],
-      keyFeatures: [
-        {
-          title: 'API',
-          items: [
-            'Full CRUD for users and todos',
-            'Typed GraphQL schema',
-            'Apollo Server runtime'
-          ]
-        },
-        {
-          title: 'Security',
-          items: [
-            'JWT authentication',
-            'Protected resolvers',
-            'Context-based authorization'
-          ]
-        },
-        {
-          title: 'Data',
-          items: [
-            'MongoDB for persistence',
-            'Mongoose data models',
-            'Relational todo ownership'
-          ]
-        }
-      ],
-      technicalImplementation: [
-        'Node.js with Apollo Server exposing a GraphQL endpoint.',
-        'GraphQL schema and resolvers implementing full CRUD.',
-        'JWT verified in the resolver context to protect routes.',
-        'MongoDB and Mongoose for data modeling and persistence.'
-      ],
-      engineeringHighlights: [
-        'Type-safe API design through GraphQL schema first.',
-        'Authorization enforced at the resolver level.',
-        'Clear separation between schema, resolvers, and data access.'
-      ]
-    },
-    {
       slug: 'sofra',
       title: 'SOFRA',
       subtitle: 'Fine Dining Restaurant Website',
@@ -311,8 +191,10 @@
           github: 'https://github.com/Keroayman34/sofra-fine-dining-restaurant'
         }
       },
-      overview:
-        'SOFRA is a frontend-only restaurant showcase designed to communicate atmosphere and quality through typography, layout, motion, and imagery. The project focuses on user experience and presentation, with interaction patterns built to guide exploration and booking-focused calls to action without backend workflows.',
+      overview: {
+        en: 'SOFRA is a frontend-only restaurant showcase designed to communicate atmosphere and quality through typography, layout, motion, and imagery. The project focuses on user experience and presentation, with interaction patterns built to guide exploration and booking-focused calls to action without backend workflows.',
+        ar: 'مشروع SOFRA هو واجهة عرض رقمية لمطعم تعتمد على Frontend فقط، وتركّز على تقديم هوية المطعم وجودته بصريًا من خلال التصميم، وتنظيم المحتوى، والحركة، والصور. الهدف منه هو تحسين تجربة الزائر وإرشاده لاكتشاف الأقسام والعروض بسهولة، مع توجيهه نحو إجراءات الحجز والتفاعل بشكل واضح، دون الحاجة إلى منطق Backend داخل هذا المشروع.'
+      },
       gallery: [
         {
           src: 'assets/projects/sofra/sofra-home-hero.png',
@@ -414,8 +296,10 @@
           github: 'https://github.com/Abdullah2elsman/cafeteria-php-project'
         }
       },
-      overview:
-        'The Cafeteria Management System is a team-built ordering platform implemented in PHP with a custom MVC architecture. It uses manual routing and a MySQL database to manage cafeteria items and orders, demonstrating practical server-side development without a framework.',
+      overview: {
+        en: 'The Cafeteria Management System is a team-built ordering platform implemented in PHP with a custom MVC architecture. It uses manual routing and a MySQL database to manage cafeteria items and orders, demonstrating practical server-side development without a framework.',
+        ar: 'مشروع Cafeteria Management System هو منصة لطلبات الكافيتريا تم تطويرها ضمن فريق باستخدام PHP وبنية Custom MVC. يوفّر النظام إدارة واضحة للأصناف والطلبات من خلال manual routing وقاعدة بيانات MySQL، ويعكس تطبيقًا عمليًا قويًا لمفاهيم Backend الأساسية بدون الاعتماد على Framework جاهز.'
+      },
       gallery: [
         {
           src: 'assets/projects/cafeteria-management-system/image_1.png',
@@ -504,8 +388,10 @@
         role: 'Frontend Development / UI Implementation',
         links: {}
       },
-      overview:
-        'TestyBite is a modern restaurant website and digital ordering experience designed around a clear, conversion-focused customer journey. The platform provides a complete flow from homepage and menu discovery through product customization, cart management, checkout, and WhatsApp-based order confirmation. The interface combines food-focused visuals with a clean, responsive UI so customers can explore categories, discover offers, review product details, customize selections, and place orders with minimal friction.',
+      overview: {
+        en: 'TestyBite is a modern restaurant website and digital ordering experience designed around a clear, conversion-focused customer journey. The platform provides a complete flow from homepage and menu discovery through product customization, cart management, checkout, and WhatsApp-based order confirmation. The interface combines food-focused visuals with a clean, responsive UI so customers can explore categories, discover offers, review product details, customize selections, and place orders with minimal friction.',
+        ar: 'TestyBite هو موقع مطعم حديث وتجربة طلب رقمية متكاملة، تم تصميمه ليقود العميل بخطوات واضحة من التصفح إلى إتمام الطلب. يقدّم رحلة كاملة تبدأ من الصفحة الرئيسية واكتشاف المنيو، ثم تخصيص المنتجات، وإدارة السلة، وإتمام Checkout، وصولًا إلى تأكيد الطلب عبر WhatsApp. كما يجمع بين عرض بصري جذاب للمنتجات وواجهة متجاوبة وسهلة الاستخدام، بما يساعد العملاء على اكتشاف الأصناف والعروض واتخاذ قرار الشراء بسرعة وراحة.'
+      },
       gallery: [
         {
           src: 'assets/projects/TastyBite_Website/image_2.png',
