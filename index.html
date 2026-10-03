@@ -3109,9 +3109,6 @@
         );
 
       /* ===== SCROLL REVEAL ===== */
-      const revealEls = document.querySelectorAll(
-        ".reveal, .reveal-left, .reveal-right",
-      );
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((e) => {
@@ -3122,7 +3119,17 @@
         },
         { threshold: 0.1, rootMargin: "0px 0px -60px 0px" },
       );
-      revealEls.forEach((el) => observer.observe(el));
+      function observeReveals() {
+        document
+          .querySelectorAll(".reveal, .reveal-left, .reveal-right")
+          .forEach((el) => {
+            if (el.dataset.revealObserved === "true") return;
+            el.dataset.revealObserved = "true";
+            observer.observe(el);
+          });
+      }
+      observeReveals();
+      window.addEventListener("portfolio:interactive-updated", observeReveals);
 
       /* ===== SKILL BARS ===== */
       const barObserver = new IntersectionObserver(
